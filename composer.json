@@ -1,0 +1,39 @@
+{
+    "name": "sethsandaru/laravel-hmvc-generator",
+    "type": "project",
+    "description": "Laravel 5 - HMVC Architecture Generator",
+    "keywords": [
+        "laravel",
+        "hmvc",
+		"generator",
+        "modular",
+        "HMVC Architecture"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.1.3",
+        "laravel/framework": "5.8.*"
+    },
+    "extra": {
+        "laravel": {
+             "providers": [
+				"SethPhat\\HMVC\\ServiceProvider"
+			],
+			"aliases": {
+                "HMVC": "SethPhat\\HMVC\\Libraries\\HMVC"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SethPhat\\HMVC\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SethPhat\\HMVC\\Test\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

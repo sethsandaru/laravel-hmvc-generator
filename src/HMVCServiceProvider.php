@@ -8,11 +8,10 @@
 
 namespace SethPhat\HMVC;
 
-
-use App\Providers\HMVCRegisterProcess;
 use Illuminate\Support\ServiceProvider;
 use SethPhat\HMVC\Libraries\Commands\CreateModuleCommand;
 use SethPhat\HMVC\Libraries\Commands\InitCommand;
+use SethPhat\HMVC\Libraries\HMVCRegisterProcess;
 
 class HMVCServiceProvider extends ServiceProvider
 {

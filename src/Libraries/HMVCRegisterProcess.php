@@ -5,7 +5,7 @@
  * Date: 10/15/2018
  * Time: 7:59 PM
  */
-namespace App\Providers;
+namespace SethPhat\HMVC\Libraries;
 
 use Illuminate\Support\Facades\File;
 

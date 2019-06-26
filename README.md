@@ -82,6 +82,6 @@ config('administration.some_key_here');
 ## Supporting the project
 If you really like this project & want to contribute a little for the development. You can buy me a coffee. Thank you very much for your supporting ♥.
 
-<a href="https://www.buymeacoffee.com/xKOM9NB8p" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+<a href="https://www.buymeacoffee.com/sethphat" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 Copyright &copy; 2018 by [Seth Phat](http://sethphat.com) aka Phat Tran Minh!

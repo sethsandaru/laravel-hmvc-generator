@@ -10,6 +10,7 @@ namespace SethPhat\HMVC\Libraries\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class CreateModuleCommand extends Command
@@ -35,24 +36,27 @@ class CreateModuleCommand extends Command
     {
         try {
             $name = $this->argument('name');
+            $name = ucfirst(Str::camel($name)); // turn it to camelCase but => CamelCase (first upper case)
 
             // create module here
-            if (File::exists(app_path(static::MODULE_PATH . $name))) {
+            $modulePath = app_path(static::MODULE_PATH . $name);
+            if (File::exists($modulePath)) {
                 $this->error("Module already created in the Modules folder. Aborted!");
                 return;
             }
 
             // ok, available
-            File::makeDirectory(app_path(static::MODULE_PATH . $name));
+            File::makeDirectory($modulePath);
             $this->info("Created Module $name Folder");
 
             // create route file
-            $file = fopen(app_path(static::MODULE_PATH . "routes.php"), "a+");
-            fclose($file);
+            $file = fopen(app_path(static::MODULE_PATH . $name . "/" . "routes.php"), "a+");
+            $this->_writeRoute($file);
 
             // create needed folders
             foreach (static::NEEDED_FOLDERS as $folder_name) {
-                File::makeDirectory(app_path(static::MODULE_PATH . $folder_name));
+                $path = app_path(static::MODULE_PATH . $name . "/" . $folder_name);
+                File::makeDirectory($path);
                 $this->info("Created $folder_name in Module $name");
             }
 
@@ -63,5 +67,13 @@ class CreateModuleCommand extends Command
         } catch (\Exception $e) {
             $this->error("Unknown Error: {$e->getMessage()}");
         }
+    }
+
+    private function _writeRoute(&$file) {
+        fwrite($file, "<?php\r\n");
+        fwrite($file, "// Hello from Seth Phat - https://sethphat.com - https://github.com/sethsandaru\r\n");
+        fwrite($file, "// Your route for the module is here, define it :D\r\n");
+        fwrite($file, "// Route::get('/path', 'Controller@method');\r\n");
+        fclose($file);
     }
 }

@@ -26,11 +26,6 @@
             "SethPhat\\HMVC\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "SethPhat\\HMVC\\Test\\": "tests/"
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

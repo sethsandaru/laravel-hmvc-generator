@@ -23,15 +23,28 @@ class InitCommand extends Command
      */
     public function handle()
     {
-        // make modules folder
-        File::makeDirectory(app_path('Modules'));
+        if (config()->has('hmvc.config_files')) {
+            $this->info("[ERROR] You've already initialized. No need to run again.");
+            return;
+        }
 
-        // copy file
-        File::copy(__DIR__ . "/../HMVCServiceProvider.php", app_path("Providers/HMVCServiceProvider.php"));
+        // make modules folder
+        $modulePath = app_path('Modules');
+        if (File::exists($modulePath)) {
+            File::deleteDirectory($modulePath);
+        }
+        File::makeDirectory($modulePath);
+
+        // copy provider file
+        $providerPath = app_path("Providers/HMVCServiceProvider.php");
+        if (File::exists($providerPath)) {
+            File::delete($providerPath);
+        }
+        File::copy(__DIR__ . "/../HMVCServiceProvider.php", $providerPath);
 
         // publish vendor
         $this->call('vendor:publish', [
-            'tag' => 'hmvc_base'
+            '--tag' => 'hmvc_base'
         ]);
 
         $this->info('Initialized the HMVC Architecture successfully.');

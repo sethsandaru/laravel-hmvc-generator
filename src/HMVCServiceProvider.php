@@ -9,7 +9,28 @@
 namespace SethPhat\HMVC;
 
 
-class HMVCServiceProvider
-{
+use Illuminate\Support\ServiceProvider;
+use SethPhat\HMVC\Libraries\Commands\CreateModuleCommand;
+use SethPhat\HMVC\Libraries\Commands\InitCommand;
 
+class HMVCServiceProvider extends ServiceProvider
+{
+    /**
+     * Perform post-registration booting of services.
+     */
+    public function boot()
+    {
+        // register command
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                InitCommand::class,
+                CreateModuleCommand::class,
+            ]);
+        }
+
+        // publish the config
+        $this->publishes([
+            __DIR__.'/Base/hmvc.php' => config_path('hmvc.php'),
+        ], 'hmvc_base');
+    }
 }

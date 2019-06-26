@@ -1,60 +1,83 @@
-# Laravel Search 3 - Seth Sandaru
-Tired to build a Search Page for Management or for User using everytime? And in the future, when you want to upgrade/update it, you have to look back the code, read the code, code, blah blah,... It's too much to handle and cost you very much for both of time & money.
+# Laravel 5 Package - HMVC Architecture Generator
+HVMC is a more-strongly design pattern based on MVC (Model-View-Controller). You got many advantages by using this pattern, especially if your project is very big.
 
-Because of that problem, just like the Vue Form Builder. Laravel Search 3 is built to help you to archive that. 
+Key advantages (M.O.R.E):
 
-Laravel Search 3 will help you to:
-- Build & Config your own Search Page
-	- Drag 'n Drop to build the Search Form (Fields to search, lookup,... Conditional Field)
-	- Drag 'n Drop to build the Table Result 
-- Render the page with full functional by using the **DataTable**.
-- Server & Client Event Hooks to help you do deal with your own data problem.
-- Easy to use, easy to maintain/upgrade in the future.
-- Supported Bootstrap 3 & 4.
+- Modularization: Reduction of dependencies between the disparate parts of the application.
+- Organization: Having a folder for each of the relevant triads makes for a lighter work load.
+- Reusability: By nature of the design it is easy to reuse nearly every piece of code.
+- Extendibility: Makes the application more extensible without sacrificing ease of maintenance.
 
-Status: **In Development**
+Find out more here: [HVMC - Wikipedia](https://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller)
 	
-## Dependencies
-- PHP 7.1+ & Laravel 5
-- JQuery
-- JQuery UI
-- DataTable
-- Select2
-- Bootstrap Tag Input
-- FontAwesome 4.4.0
+## Install & Update
+Install using Composer:
+```
+composer require sethsandaru/laravel-hmvc-generator
+```
 
-## Development Stages
-1. Prototype
-	- Template & Rendering (Table & Form)
-	- Library init
-	- Structure project
-2. Configuration
-	- SearchGroup & SearchRelation
-	- Search3 default config
-3. Search 3 Library
-	- SearchBuilder
-		- SearchJoin
-		- SearchSelect
-		- SearchCondition
-	- Event Hooks
-	- APIs???
-	- Helpers???
-4. Search 3 Configuration (Drag & Drop). Based on JQuery & JQuery UI.
-	- Search Form
-	- Table Result
-5. Search 3 Front-end
-	- Search3Builder (depend on the configuration)
-		- Hooks
-		- Default config
-6. Test cases:
-	- Simple table
-	- Table & 1 join
-	- Table & 2 join
-	- Table & 3 join with 1 complex join
-	- Complex Conditions while searching
-	- Use hook to manipulate the search query builder (SERVER).
-	- Use hook to manipulate the search result builder (SERVER).
-	- Test hook in Front-End
+Update using Composer:
+```
+composer update sethsandaru/laravel-hmvc-generator
+```
+
+## How to use?
+
+### Notes
+- If you're using Laravel 5.5+, then it's ok, the framework itself will do the ServiceProvider scanning process.
+- If you're using Laravel 5.4 and below, please add the `HMVCServiceProvider` into the `providers` in `config/app.php`
+    - Full namespace path: `SethPhat\HMVC\HMVCServiceProviderg`
+
+### First Initialize
+For the first time, please run this command:
+```php
+php artisan make:hmvc
+```
+
+If you see the successful message, you're done!
+
+### Create a Module
+Use this command to create a new module:
+```php
+php artisan hmvc:create_module <Module_Name>
+```
+
+A new module will be created inside the `app/Modules` folder.
+
+### Config files
+To add your own configuration file and use the `config` function, please open `config/hmvc.php`
+
+You will see this:
+```php
+<?php
+//...
+return [
+    'config_files' => [
+        // your config file here
+        // 'administration' => 'Modules/Administration/Configs/administration.php'
+    ]
+];
+```
+
+Following the instruction above. You must add a right path to your config file, no full path, just the path in `app` folder.
+
+Example:
+```php
+<?php
+//...
+return [
+    'config_files' => [
+        'administration' => 'Modules/Administration/Configs/administration.php'
+    ]
+];
+```
+
+I will get the config out like this:
+```php
+<?php
+//...
+config('administration.some_key_here');
+```
 	
 ## Supporting the project
 If you really like this project & want to contribute a little for the development. You can buy me a coffee. Thank you very much for your supporting ♥.

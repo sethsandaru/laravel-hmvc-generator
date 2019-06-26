@@ -1,6 +1,6 @@
 {
     "name": "sethsandaru/laravel-hmvc-generator",
-    "type": "project",
+    "type": "library",
     "description": "Laravel 5 - HMVC Architecture Generator",
     "keywords": [
         "laravel",

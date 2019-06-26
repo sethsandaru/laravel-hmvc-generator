@@ -17,11 +17,8 @@
     "extra": {
         "laravel": {
              "providers": [
-				"SethPhat\\HMVC\\ServiceProvider"
-			],
-			"aliases": {
-                "HMVC": "SethPhat\\HMVC\\Libraries\\HMVC"
-            }
+				"SethPhat\\HMVC\\HMVCServiceProvider"
+			]
         }
     },
     "autoload": {

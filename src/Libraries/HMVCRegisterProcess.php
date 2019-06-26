@@ -8,16 +8,21 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\ServiceProvider;
 
-class HMVCServiceProvider extends ServiceProvider
+trait HMVCRegisterProcess
 {
     /**
      * Register bindings in the container.
      */
-    public function register()
+    private function _register()
     {
+        if (!config()->has('hmvc.config_files')) {
+            return;
+        }
+
+        // register
         $configFiles = config('hmvc.config_files');
+
         // register your config file here
         foreach ($configFiles as $alias => $path) {
             $this->mergeConfigFrom(app_path($path), $alias);
@@ -27,8 +32,13 @@ class HMVCServiceProvider extends ServiceProvider
     /**
      * Perform post-registration booting of services.
      */
-    public function boot()
+    private function _boot()
     {
+        if (!config()->has('hmvc.config_files')) {
+            return;
+        }
+
+        // booting modules
         $directories = array_map('basename', File::directories(app_path('Modules/')));
         foreach ($directories as $moduleName) {
             $this->_registerModule($moduleName);
@@ -36,7 +46,7 @@ class HMVCServiceProvider extends ServiceProvider
     }
 
     private function _registerModule($moduleName) {
-        $modulePath = __DIR__ . "/../Modules/$moduleName/";
+        $modulePath = app_path('Modules/' . $moduleName . "/");
 
         // boot route
         if (File::exists($modulePath . "routes.php")) {
